@@ -11,20 +11,20 @@ const authRoutes = require("./routes/auth");
 
 const app = express();
 const server = http.createServer(app);
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  }),
+);
+
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000", "https://nova-chat-sigma.vercel.app"],
+    origin: true,
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
-
-app.use(
-  cors({
-    origin: ["http://localhost:3000", "https://nova-chat-sigma.vercel.app"],
-    credentials: true,
-  }),
-);
 app.use(express.json());
 
 initializeDatabase();
